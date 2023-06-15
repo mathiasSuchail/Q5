@@ -1,0 +1,81 @@
+<form #myForm="ngForm" (ngSubmit)="myForm.valid && onSubmit()">
+  <fieldset>
+    <label for="email">Email adress : </label>
+    <input
+      type="email"
+      name="email"
+      required
+      [(ngModel)]="form.email"
+      #email="ngModel"
+    />
+  </fieldset>
+  <div *ngIf="email.errors && myForm.submitted">
+    <span *ngIf="email.errors?.['required']">L'email est requise</span>
+    <span *ngIf="email.errors?.['email']">L'email est invalide</span>
+  </div>
+
+  <fieldset>
+    <label for="firstName">First Name : </label>
+    <input
+      type="text"
+      name="firstName"
+      required
+      [minlength]="form.minlength"
+      [(ngModel)]="form.firstName"
+      #firstName="ngModel"
+    />
+  </fieldset>
+  <div
+    *ngIf="
+      (firstName.errors || firstName.value.length > form.maxlength) &&
+      myForm.submitted
+    "
+  >
+    <span *ngIf="firstName.errors?.['required']">Le prénom est requis</span>
+    <span *ngIf="firstName.value.length >= form.maxlength"
+      >Le prénom ne doit pas dépasser {{ form.maxlength }} caracteres</span
+    >
+    <span *ngIf="firstName.errors?.['minlength']"
+      >Le prénom doit faire au moin {{ form.minlength }} caracteres</span
+    >
+  </div>
+
+  <fieldset>
+    <label for="lastName">Last Name : </label>
+    <input
+      type="text"
+      name="lastName"
+      required
+      minlength="3"
+      [(ngModel)]="form.lastName"
+      #lastName="ngModel"
+    />
+  </fieldset>
+
+  <div
+    *ngIf="
+      (lastName.errors || lastName.value.length > form.maxlength) &&
+      myForm.submitted
+    "
+  >
+    <span *ngIf="lastName.errors?.['required']">Le nom est requis</span>
+    <span *ngIf="lastName.value.length >= form.maxlength"
+      >Le nom ne doit pas dépasser {{ form.maxlength }} caracteres</span
+    >
+    <span *ngIf="lastName.errors?.['minlength']"
+      >Le nom doit faire au moin {{ form.minlength }} caracteres</span
+    >
+  </div>
+
+  <fieldset>
+    <label for="password">Password : </label>
+    <input
+      type="password"
+      name="password"
+      required
+      [(ngModel)]="form.password"
+      #password="ngModel"
+    />
+  </fieldset>
+  <input type="submit" value="Subscribe" />
+</form>

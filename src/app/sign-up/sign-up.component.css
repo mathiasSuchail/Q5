@@ -1,0 +1,12 @@
+form{
+    width: fit-content;
+    margin: auto;
+}
+fieldset{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px;
+}
+
